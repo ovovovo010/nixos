@@ -20,5 +20,5 @@
     # 主題設定 (可選，預設是原版)
     theme = inputs.spicetify-nix.legacyPackages.${pkgs.system}.themes.catppuccin;
     colorScheme = "macchiato";
-  };
+  
 }
