@@ -197,7 +197,7 @@
 
       #custom-cat:hover {
         background: linear-gradient(90deg, #fcd34d 0%, #fbbf24 100%);
-        transform: scale(1.08);
+        padding: 0 24px;
       }
 
       /* 超可愛的音樂播放器 */
@@ -213,7 +213,7 @@
 
       #custom-music:hover {
         background: linear-gradient(90deg, #f472b6 0%, #ec4899 100%);
-        transform: scale(1.05);
+        padding: 0 24px;
       }
 
       /* 工作區 */
@@ -234,7 +234,6 @@
       #workspaces button:hover {
         background-color: rgba(124, 58, 237, 0.5);
         color: #e9d5ff;
-        transform: scale(1.05);
       }
 
       #workspaces button.active {
@@ -278,7 +277,7 @@
       #battery:hover,
       #clock:hover {
         background-color: rgba(124, 58, 237, 0.6);
-        transform: translateY(-2px);
+        border-bottom: 2px solid #b794f6;
       }
 
       /* 音量特殊顏色 */
