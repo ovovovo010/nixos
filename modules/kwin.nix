@@ -137,7 +137,6 @@
   # 遊戲工具
   home.packages = with pkgs; [
     # 性能監控
-    
     goverlay
     
     # 啟動工具
@@ -149,43 +148,6 @@
     iotop
   ];
 
-  # 環境變數
-  home.sessionVariables = {
-    # MangoHud 預設配置
-    MANGOHUD_CONFIG = "fps,frametime,cpu_temp,gpu_temp";
-    
-    # 強制特定後端（如果需要）
-    # SDL_VIDEODRIVER = "x11";
-    # QT_QPA_PLATFORM = "xcb";
+
   };
-
-  # MangoHud 配置
-  home.file.".config/MangoHud/MangoHud.conf".text = ''
-    # 顯示設置
-    fps
-    frametime=0
-    frame_timing=1
-    
-    # 硬體資訊
-    cpu_temp
-    gpu_temp
-    cpu_power
-    gpu_power
-    
-    # FPS 限制（0 = 無限制）
-    fps_limit=0
-    
-    # 位置和大小
-    position=top-left
-    font_size=24
-    
-    # 背景透明度
-    background_alpha=0.5
-    
-    # 快捷鍵
-    toggle_hud=Shift_R+F12
-    toggle_logging=Shift_L+F2
-  '';
-
-
 }
