@@ -22,7 +22,7 @@
     # 基本的遊戲支緣
     home-manager.users.eric.home.packages = [
     
-    mangohud
+    
     
     # Wine (如果需要跑 Windows 遊戲)
     wine
@@ -35,6 +35,33 @@
 
   # 啟用 GameMode (自動優化遊戲效能)
   programs.gamemode.enable = true;
+
+  programs.mangohud = {
+    enable = true;
+    # 這裡設定全域預設配置
+    settings = {
+      # 效能監控項
+      cpu_stats = true;
+      gpu_stats = true;
+      fps = true;
+      frametime = true;
+      ram = true;
+      vram = true;
+      
+      # 外觀設定
+      table_columns = 3;
+      font_size = 24;
+      background_alpha = "0.5";
+      round_corners = 10;
+      
+      # 顯示位置 (top-left, top-right, bottom-left, bottom-right)
+      position = "top-left";
+      
+      # 快捷鍵
+      toggle_hud = "Shift_R+F12";
+      toggle_logging = "Shift_L+F2";
+    };
+  };
 
   # 圖形驅動 (根據你的顯卡選擇其中一個，其他註解掉)
   
