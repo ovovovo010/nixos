@@ -13,6 +13,8 @@
       ./System/storage-System.nix
       ./System/users-System.nix
       ./System/steam-System.nix
+      ./System/kwin-system.nix
+
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
