@@ -186,44 +186,34 @@
 
       /* 可愛的小貓模組 */
       #custom-cat {
-        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
         color: #ffffff;
         padding: 0 20px;
         margin: 4px 0px 4px 8px;
         border-radius: 20px;
         font-size: 14px;
-        animation: cat-bounce 2s ease-in-out infinite;
-      }
-
-      @keyframes cat-bounce {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-3px); }
+        transition: all 0.3s ease;
       }
 
       #custom-cat:hover {
-        background: linear-gradient(135deg, #fcd34d 0%, #fbbf24 100%);
-        transform: scale(1.05);
+        background: linear-gradient(90deg, #fcd34d 0%, #fbbf24 100%);
+        transform: scale(1.08);
       }
 
       /* 超可愛的音樂播放器 */
       #custom-music {
-        background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+        background: linear-gradient(90deg, #ec4899 0%, #f472b6 100%);
         color: #ffffff;
         padding: 0 20px;
         margin: 4px 8px;
         border-radius: 20px;
         font-size: 13px;
-        animation: music-pulse 2s ease-in-out infinite;
-      }
-
-      @keyframes music-pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.85; }
+        transition: all 0.3s ease;
       }
 
       #custom-music:hover {
-        background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
-        transform: scale(1.02);
+        background: linear-gradient(90deg, #f472b6 0%, #ec4899 100%);
+        transform: scale(1.05);
       }
 
       /* 工作區 */
@@ -248,19 +238,13 @@
       }
 
       #workspaces button.active {
-        background: linear-gradient(135deg, #7c3aed 0%, #b794f6 100%);
+        background: linear-gradient(90deg, #7c3aed 0%, #b794f6 100%);
         color: #ffffff;
       }
 
       #workspaces button.urgent {
         background-color: #f87171;
         color: #ffffff;
-        animation: urgent-blink 1s ease-in-out infinite;
-      }
-
-      @keyframes urgent-blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.7; }
       }
 
       /* 窗口標題 */
@@ -299,7 +283,7 @@
 
       /* 音量特殊顏色 */
       #pulseaudio {
-        background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+        background: linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%);
       }
 
       #pulseaudio.muted {
@@ -337,14 +321,8 @@
 
       /* 電池狀態 */
       #battery.charging {
-        background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+        background: linear-gradient(90deg, #34d399 0%, #10b981 100%);
         color: #ffffff;
-        animation: battery-charging 2s ease-in-out infinite;
-      }
-
-      @keyframes battery-charging {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.8; }
       }
 
       #battery.warning {
@@ -355,17 +333,11 @@
       #battery.critical {
         background-color: rgba(248, 113, 113, 0.8);
         color: #ffffff;
-        animation: battery-critical 1s ease-in-out infinite;
-      }
-
-      @keyframes battery-critical {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.6; }
       }
 
       /* 時鐘特殊樣式 */
       #clock {
-        background: linear-gradient(135deg, #7c3aed 0%, #b794f6 100%);
+        background: linear-gradient(90deg, #7c3aed 0%, #b794f6 100%);
         color: #ffffff;
         font-weight: 700;
         margin-right: 8px;
