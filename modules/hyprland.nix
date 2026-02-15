@@ -148,6 +148,7 @@
         # 加你想開的程式（範例，依需求改/加）
          "hyprpaper"
 	 "fcitx5 -d"
+	 "waybar"
         # "~/.config/hypr/scripts/init.sh &"  # 自訂腳本
 	"swww-daemon --format xrgb"
         "swww img /home/eric/Pictures/wallpaper/pexels-rpnickson-2885320.jpg --transition-type fade --ta         nsition-duration 2"
