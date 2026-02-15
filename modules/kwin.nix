@@ -19,8 +19,8 @@
   };
 
   # 遊戲相關套件
-  environment.systemPackages = with pkgs; [
-    # 基本的遊戲支援
+    # 基本的遊戲支緣
+    home-manager.users.eric.home.packages = [
     gamemode
     mangohud
     
@@ -38,12 +38,12 @@
 
   # 圖形驅動 (根據你的顯卡選擇其中一個，其他註解掉)
   
-  # NVIDIA 顯卡:
-  # services.xserver.videoDrivers = [ "nvidia" ];
-  # hardware.nvidia = {
-  #   modesetting.enable = true;
-  #   open = false;  # 開源驅動改 true
-  # };
+   NVIDIA 顯卡:
+   services.xserver.videoDrivers = [ "nvidia" ];
+   hardware.nvidia = {
+     modesetting.enable = true;
+     open = false;  # 開源驅動改 true
+   };
   
   # AMD 顯卡:
   # services.xserver.videoDrivers = [ "amdgpu" ];
