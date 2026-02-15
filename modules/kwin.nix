@@ -20,7 +20,7 @@
 
   # 遊戲相關套件
     # 基本的遊戲支緣
-    home-manager.users.eric.home.packages = [
+    home-manager.users.eric.home.packages = with pkgs; [
     
     
     
