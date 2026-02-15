@@ -65,12 +65,7 @@
 
   # 圖形驅動 (根據你的顯卡選擇其中一個，其他註解掉)
   
-   services.xserver.videoDrivers = [ "nvidia" ];
-   hardware.nvidia = {
-     modesetting.enable = true;
-     open = false;  # 開源驅動改 true
-   };
-  
+    
   # AMD 顯卡:
   # services.xserver.videoDrivers = [ "amdgpu" ];
   # hardware.opengl = {
