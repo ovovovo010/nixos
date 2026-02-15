@@ -18,3 +18,4 @@ programs.spicetify = {
       spicePkgs.extensions.adblock
     ];
   };
+  }
