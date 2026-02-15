@@ -17,6 +17,7 @@
     ./modules/cava.nix
     ./modules/hyprlock-idle.nix
     ./modules/swaync.nix
+    ./modules/spicetify.nix
 
   ];
 
