@@ -228,13 +228,6 @@
     executable = true;
   };
 
-  # KDE 快捷鍵配置
-  home.file.".config/kglobalshortcutsrc".text = lib.mkAfter ''
-    [game-launcher.desktop]
-    _k_friendly_name=Game Launcher
-    launch=Meta+G,none,Launch Game Launcher
-  '';
-
   # 創建 .desktop 檔案用於快捷鍵綁定
   xdg.desktopEntries.game-launcher = {
     name = "Game Launcher";
@@ -252,13 +245,4 @@
     libnotify  # 用於通知
     rofi       # 用於 UI
   ];
-
-  # KDE Plasma 配置
-  programs.plasma = lib.mkIf (config.programs.plasma.enable or false) {
-    shortcuts = {
-      "game-launcher.desktop" = {
-        "launch" = "Meta+G";
-      };
-    };
-  };
 }
