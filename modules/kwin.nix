@@ -5,7 +5,7 @@
     # 宣告 HM 版本 (必要)
     home.stateVersion = "25.11";
 
-    home-manager.users.eric.home.packages = with pkgs; [
+   home.packages = with pkgs; [
     
     
     
