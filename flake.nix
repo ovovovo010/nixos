@@ -13,18 +13,22 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+ outputs = { self, nixpkgs, home-manager, spicetify-nix, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
-        # 改回相對路徑，因為檔案就在跟 flake.nix 同一級
         ./configuration.nix
         
-        home-manager.nixosModules.home-manager {
+        # 1. 直接引用 Spicetify 模組
+        spicetify-nix.nixosModules.default
+
+        # 2. 修正 Home Manager 的寫法，避免匿名函數導致的遞迴問題
+        home-manager.nixosModules.home-manager
+        {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          # 假設 home.nix 也在根目錄
+          home-manager.extraSpecialArgs = { inherit inputs; }; # 讓 home.nix 也能用 inputs
           home-manager.users.eric = import ./home.nix;
         }
       ];
