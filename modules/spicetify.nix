@@ -4,16 +4,18 @@
     inputs.spicetify-nix.homeManagerModules.default
   ];
 
-  # 2. Spicetify 原生 HM 設定
-  programs.spicetify = {
+ programs.spicetify = {
     enable = true;
     
-    # 擴充商店與插件
-    enabledExtensions = with inputs.spicetify-nix.legacyPackages.${pkgs.system}.extensions; [
-      marketplace  # 擴充商店
-      adblock      # 擋廣告
-      shuffle      # 隨機播放優化
-    ];
+    # 使用 spicePkgs 變數簡化路徑，確保抓得到 marketplace
+    enabledExtensions = 
+      let
+        spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+      in [
+        spicePkgs.extensions.marketplace
+        spicePkgs.extensions.adblock
+      ];
+  };
 
     # 主題設定 (可選，預設是原版)
     theme = inputs.spicetify-nix.legacyPackages.${pkgs.system}.themes.catppuccin;
