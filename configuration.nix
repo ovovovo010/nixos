@@ -35,8 +35,9 @@
 
    services.xserver.enable = true;
 
+   services.flatpak.enable = true;
+
    nix.settings.substituters = [
-  "https://mirror.sjtu.edu.cn/nix-channels/store"  # 上海交大鏡像
   "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"  # 清華鏡像
   "https://cache.nixos.org/"  # 官方源作為備用
 ];
