@@ -15,20 +15,16 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, spicetify-nix, ... }@inputs: {
+ outputs = { self, nixpkgs, home-manager, spicetify-nix, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      # 移除原本在這邊的 system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
-        # 1. 系統核心配置
+        # 在這裡定義 platform 即可消除警告
+        { nixpkgs.hostPlatform = "x86_64-linux"; }
+        
         ./configuration.nix
-
-        # 2. Spicetify 系統級模組
-        spicetify-nix.nixosModules.default
-
-        # 3. Home Manager 配置
-        home-manager.nixosModules.home-manager
-        {
+        home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit inputs; };
@@ -37,4 +33,5 @@
       ];
     };
   };
-}
+  
+  
