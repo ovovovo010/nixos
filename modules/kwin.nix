@@ -25,7 +25,7 @@
     
     
     # Wine (如果需要跑 Windows 遊戲)
-    wine
+    wineWowPackages.stable
     winetricks
     
     # Vulkan 支援
