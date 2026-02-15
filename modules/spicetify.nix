@@ -4,21 +4,17 @@
     inputs.spicetify-nix.homeManagerModules.default
   ];
 
- programs.spicetify = {
+programs.spicetify = {
     enable = true;
     
-    # 使用 spicePkgs 變數簡化路徑，確保抓得到 marketplace
-    enabledExtensions = 
-      let
-        spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
-      in [
-        spicePkgs.extensions.marketplace
-        spicePkgs.extensions.adblock
-      ];
-  };
-
-    # 主題設定 (可選，預設是原版)
+    # 確保這兩個變數路徑正確
     theme = inputs.spicetify-nix.legacyPackages.${pkgs.system}.themes.catppuccin;
-    colorScheme = "macchiato";
-  
-}
+    colorScheme = "macchiato"; 
+
+    enabledExtensions = let
+      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+    in [
+      spicePkgs.extensions.marketplace
+      spicePkgs.extensions.adblock
+    ];
+  };
