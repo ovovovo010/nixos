@@ -33,7 +33,7 @@
 
         # 🐱 8bit 小貓常駐！
         "custom/cat" = {
-          format = "  ₍^ >ヮ<^₎ .ᐟ.ᐟ";
+          format = "ฅ^•ﻌ•^ฅ";
           tooltip = false;
           on-click = "notify-send '🐱 Nya~' 'Meow meow! (=^･ω･^=)'";
         };
@@ -168,7 +168,7 @@
 
     style = ''
       * {
-        font-family: "JetBrains Mono", "Noto Color Emoji", sans-serif;
+        font-family: "JetBrains Mono", "Noto Sans CJK TC", sans-serif;
         font-size: 13px;
         font-weight: 600;
         border: none;
@@ -188,32 +188,30 @@
       #custom-cat {
         background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
         color: #ffffff;
-        padding: 0 20px;
+        padding: 0 16px;
         margin: 4px 0px 4px 8px;
-        border-radius: 20px;
-        font-size: 14px;
+        border-radius: 12px;
+        font-size: 16px;
         transition: all 0.3s ease;
       }
 
       #custom-cat:hover {
         background: linear-gradient(90deg, #fcd34d 0%, #fbbf24 100%);
-        padding: 0 24px;
       }
 
       /* 超可愛的音樂播放器 */
       #custom-music {
         background: linear-gradient(90deg, #ec4899 0%, #f472b6 100%);
         color: #ffffff;
-        padding: 0 20px;
+        padding: 0 16px;
         margin: 4px 8px;
-        border-radius: 20px;
+        border-radius: 12px;
         font-size: 13px;
         transition: all 0.3s ease;
       }
 
       #custom-music:hover {
         background: linear-gradient(90deg, #f472b6 0%, #ec4899 100%);
-        padding: 0 24px;
       }
 
       /* 工作區 */
