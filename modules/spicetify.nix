@@ -14,7 +14,7 @@ programs.spicetify = {
     enabledExtensions = let
       spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
     in [
-      spicePkgs.extensions.marketplace
+  #    spicePkgs.extensions.marketplace
       spicePkgs.extensions.adblock
     ];
   };
