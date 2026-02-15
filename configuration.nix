@@ -13,6 +13,7 @@
       ./System/storage-System.nix
       ./System/users-System.nix
       ./System/steam-System.nix
+      ./System/spicetify.nix
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
