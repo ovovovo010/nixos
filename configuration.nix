@@ -10,10 +10,9 @@
       ./System/greetd-System.nix
       ./System/nvidia-driver-System.nix
       ./System/Packages-System.nix
-      ./System/storage-System.nix
       ./System/users-System.nix
       ./System/steam-System.nix
-      ./System/kwin-system.nix
+    #  ./System/kwin-system.nix
 
     ];
 

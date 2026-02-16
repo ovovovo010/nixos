@@ -63,5 +63,6 @@
      hyprlock
      swaynotificationcenter
      yazi
+     heroic
   ];
 }
