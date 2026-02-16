@@ -5,7 +5,7 @@
   fileSystems."/mnt/data" = {
     device = "/dev/disk/by-uuid/d08fc080-8f82-4807-a561-c1f305f03da0";
     fsType = "ext4"; # 如果是其他格式请修改此处
-    options = [ "defaults" "nofail" ];
+    options = [ "defaults" "nofail" "exec" "rw" ];
   };
 
   # 自动设置权限：确保你的用户拥有该目录的读写权
