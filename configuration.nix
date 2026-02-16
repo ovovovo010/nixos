@@ -13,6 +13,7 @@
       ./System/users-System.nix
       ./System/steam-System.nix
     #  ./System/kwin-system.nix
+      ./System/data.nix
 
     ];
 
