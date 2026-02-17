@@ -1,174 +1,163 @@
 { config, pkgs, lib, ... }:
+
 {
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
 
-    settings = {
-      mainBar = {
-        layer = "top";
-        position = "top";
-        height = 36;
-        spacing = 0;
-        exclusive = true;
-        passthrough = false;
-        fixed-center = true;
+    settings = [{
+      layer = "top";
+      position = "top";
+      height = 36;
+      margin-top = 8;
+      margin-left = 12;
+      margin-right = 12;
+      spacing = 0;
+      exclusive = true;
 
-        modules-left = [
-          "custom/logo"
-          "hyprland/workspaces"
-          "hyprland/window"
-        ];
+      modules-left = [
+        "hyprland/workspaces"
+        "hyprland/window"
+      ];
 
-        modules-center = [
-          "clock"
-        ];
+      modules-center = [
+        "clock"
+      ];
 
-        modules-right = [
-          "custom/music"
-          "cpu"
-          "memory"
-          "pulseaudio"
-          "network"
-          "tray"
-        ];
+      modules-right = [
+        "pulseaudio"
+        "network"
+        "battery"
+        "cpu"
+        "memory"
+        "tray"
+      ];
 
-        # Logo
-        "custom/logo" = {
-          format = "  ";
-          tooltip = false;
+      "hyprland/workspaces" = {
+        format = "{icon}";
+        format-icons = {
+          "1" = "一";
+          "2" = "二";
+          "3" = "三";
+          "4" = "四";
+          "5" = "五";
+          "6" = "六";
+          "7" = "七";
+          "8" = "八";
+          "9" = "九";
+          active = "";
+          urgent = "";
+          default = "";
         };
+        persistent-workspaces = {
+          "*" = 5;
+        };
+        on-click = "activate";
+        sort-by-number = true;
+      };
 
-        # Hyprland 工作區
-        "hyprland/workspaces" = {
-          format = "{icon}";
-          format-icons = {
-            "1" = "一";
-            "2" = "二";
-            "3" = "三";
-            "4" = "四";
-            "5" = "五";
-            "6" = "六";
-            "7" = "七";
-            "8" = "八";
-            "9" = "九";
-            "10" = "十";
-            urgent = "";
-            default = "○";
+      "hyprland/window" = {
+        format = "  {}";
+        max-length = 40;
+        separate-outputs = true;
+      };
+
+      "clock" = {
+        format = "  {:%H:%M}";
+        format-alt = "  {:%Y-%m-%d %H:%M:%S}";
+        tooltip-format = "<tt><small>{calendar}</small></tt>";
+        calendar = {
+          mode = "year";
+          mode-mon-col = 3;
+          weeks-pos = "right";
+          on-scroll = 1;
+          format = {
+            months   = "<span color='#cad3f5'><b>{}</b></span>";
+            days     = "<span color='#cad3f5'>{}</span>";
+            weeks    = "<span color='#91d7e3'><b>W{}</b></span>";
+            weekdays = "<span color='#c6a0f6'><b>{}</b></span>";
+            today    = "<span color='#ed8796'><b><u>{}</u></b></span>";
           };
-          on-scroll-up = "hyprctl dispatch workspace e+1";
-          on-scroll-down = "hyprctl dispatch workspace e-1";
-          persistent-workspaces = {
-            "*" = 5;
-          };
-        };
-
-        # 當前窗口標題
-        "hyprland/window" = {
-          format = "  {}";
-          max-length = 40;
-          separate-outputs = true;
-          rewrite = {
-            "(.*) — Mozilla Firefox" = "  $1";
-            "(.*) - fish" = "  $1";
-            "(.*) - nvim" = "  $1";
-          };
-        };
-
-        # 時鐘（中央）
-        "clock" = {
-          format = "  {:%H:%M}";
-          format-alt = "  {:%a %b %d, %Y}";
-          tooltip-format = "<tt><small>{calendar}</small></tt>";
-          calendar = {
-            mode = "month";
-            on-scroll = 1;
-            format = {
-              months = "<span color='#7aa2f7'><b>{}</b></span>";
-              days = "<span color='#a9b1d6'>{}</span>";
-              weekdays = "<span color='#7dcfff'><b>{}</b></span>";
-              today = "<span color='#f7768e'><b><u>{}</u></b></span>";
-            };
-          };
-          actions = {
-            on-click-right = "mode";
-            on-scroll-up = "shift_up";
-            on-scroll-down = "shift_down";
-          };
-        };
-
-        # 🎵 音樂播放器
-        "custom/music" = {
-          format = "{}";
-          max-length = 40;
-          interval = 2;
-          exec = "~/.config/waybar/scripts/music.sh";
-          on-click = "playerctl play-pause";
-          on-scroll-up = "playerctl next";
-          on-scroll-down = "playerctl previous";
-          return-type = "json";
-          escape = true;
-        };
-
-        # CPU
-        "cpu" = {
-          format = "  {usage}%";
-          tooltip-format = "CPU: {usage}%\nLoad: {load}";
-          interval = 2;
-        };
-
-        # 記憶體
-        "memory" = {
-          format = "  {percentage}%";
-          tooltip-format = "{used:0.1f}G / {total:0.1f}G";
-          interval = 2;
-        };
-
-        # 音量
-        "pulseaudio" = {
-          format = "{icon} {volume}%";
-          format-muted = "  muted";
-          format-icons = {
-            headphone = "";
-            headset = "";
-            default = [ "" "" "" ];
-          };
-          on-click = "pavucontrol";
-          scroll-step = 5;
-        };
-
-        # 網路
-        "network" = {
-          format-wifi = "  {essid}";
-          format-ethernet = "  {ipaddr}";
-          format-disconnected = "  offline";
-          tooltip-format = "{ifname}: {ipaddr}/{cidr}\n{gwaddr}";
-          on-click = "nm-connection-editor";
-        };
-
-        # 系統托盤
-        "tray" = {
-          icon-size = 16;
-          spacing = 6;
         };
       };
-    };
+
+      "pulseaudio" = {
+        format        = "{icon}  {volume}%";
+        format-muted  = "󰖁  muted";
+        format-icons  = {
+          default  = [ "󰕿" "󰖀" "󰕾" ];
+          headphone = "󰋋";
+          headset   = "󰋎";
+        };
+        on-click  = "pavucontrol";
+        scroll-step = 5;
+      };
+
+      "network" = {
+        format-wifi        = "󰤨  {essid}";
+        format-ethernet    = "󰈀  {ipaddr}";
+        format-disconnected = "󰤭  offline";
+        format-alt         = "  {ipaddr}/{cidr}";
+        tooltip-format     = "{ifname}: {ipaddr}\n{gwaddr} via {essid}";
+        on-click-right     = "nm-connection-editor";
+      };
+
+      "battery" = {
+        states = {
+          good     = 80;
+          warning  = 30;
+          critical = 15;
+        };
+        format          = "{icon}  {capacity}%";
+        format-charging = "󰂄  {capacity}%";
+        format-plugged  = "󰚥  {capacity}%";
+        format-icons    = [ "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
+      };
+
+      "cpu" = {
+        format   = "  {usage}%";
+        tooltip  = true;
+        interval = 2;
+      };
+
+      "memory" = {
+        format         = "  {used:0.1f}G";
+        tooltip-format = "{used:0.1f}G / {total:0.1f}G used";
+        interval       = 5;
+      };
+
+      "tray" = {
+        icon-size = 14;
+        spacing   = 8;
+      };
+    }];
 
     style = ''
-      /* ── Tokyo Night 漂浮圓角風 ── */
-      @define-color bg        #1a1b2e;
-      @define-color bg1       #16213e;
-      @define-color surface   #24283b;
-      @define-color overlay   #292e42;
-      @define-color blue      #7aa2f7;
-      @define-color cyan      #7dcfff;
-      @define-color purple    #bb9af7;
-      @define-color red       #f7768e;
-      @define-color yellow    #e0af68;
-      @define-color green     #9ece6a;
-      @define-color fg        #c0caf5;
-      @define-color fg-dim    #565f89;
-      @define-color border    #3d59a1;
+      /* ── Catppuccin Macchiato palette ─────────────────────────── */
+      @define-color base     #1e2030;
+      @define-color mantle   #181926;
+      @define-color crust    #131421;
+      @define-color surface0 #363a4f;
+      @define-color surface1 #494d64;
+      @define-color surface2 #5b5f77;
+      @define-color overlay0 #6e738d;
+      @define-color overlay1 #8087a2;
+      @define-color overlay2 #939ab7;
+      @define-color text     #cad3f5;
+      @define-color subtext  #a5adcb;
+      @define-color mauve    #c6a0f6;
+      @define-color red      #ed8796;
+      @define-color peach    #f5a97f;
+      @define-color yellow   #eed49f;
+      @define-color green    #a6da95;
+      @define-color teal     #8bd5ca;
+      @define-color sky      #91d7e3;
+      @define-color sapphire #7dc4e4;
+      @define-color blue     #8aadf4;
+      @define-color lavender #b7bdf8;
+      @define-color pink     #f5bde6;
 
+      /* ── Reset ────────────────────────────────────────────────── */
       * {
         font-family: "JetBrainsMono Nerd Font", "Noto Sans CJK TC", monospace;
         font-size: 13px;
@@ -176,244 +165,166 @@
         border: none;
         border-radius: 0;
         min-height: 0;
-        padding: 0;
         margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
-      /* ── Bar 主體：透明背景，讓模組漂浮 ── */
+      /* ── 整條 bar 容器 ────────────────────────────────────────── */
       window#waybar {
-        background-color: transparent;
-        color: @fg;
+        background: transparent;
       }
 
-      .modules-left,
-      .modules-center,
-      .modules-right {
-        margin: 6px 8px;
-      }
+      window#waybar > box {
+        /* 深色半透明底 */
+        background: alpha(@base, 0.93);
 
-      /* ── 左側：Logo ── */
-      #custom-logo {
-        background-color: @blue;
-        color: @bg;
-        padding: 0 14px;
-        font-size: 16px;
-        border-radius: 10px 0 0 10px;
-        margin-right: 0;
-      }
+        /* 邊框：上亮下暗，製造凸起立體感 */
+        border-top:    1px solid alpha(@surface2, 0.65);
+        border-left:   1px solid alpha(@surface1, 0.5);
+        border-right:  1px solid alpha(@surface0, 0.4);
+        border-bottom: 1px solid alpha(@crust,    0.9);
+        border-radius: 10px;
 
-      /* ── 工作區 ── */
-      #workspaces {
-        background-color: @surface;
-        border-radius: 0 10px 10px 0;
+        /* 多層陰影 = 懸浮立體感 */
+        box-shadow:
+          /* 頂部內高光 */
+          0  1px 0 alpha(@overlay0, 0.12) inset,
+          /* 底部內陰影 */
+          0 -1px 0 alpha(@crust,    0.45) inset,
+          /* 主投影 */
+          0  4px 14px alpha(@crust, 0.65),
+          0  8px 28px alpha(@crust, 0.30),
+          /* 近距離輪廓陰影 */
+          0  1px  4px alpha(@crust, 0.85);
+
         padding: 0 6px;
-        margin-right: 6px;
+      }
+
+      /* ── 所有 module 基礎樣式 ─────────────────────────────────── */
+      #workspaces,
+      #window,
+      #clock,
+      #pulseaudio,
+      #network,
+      #battery,
+      #cpu,
+      #memory,
+      #tray {
+        color: @subtext;
+        padding: 0 10px;
+        background: transparent;
+        transition: color 0.15s ease;
+      }
+
+      /* ── 右側 module 之間加分隔線 ─────────────────────────────── */
+      #pulseaudio {
+        border-left: 1px solid alpha(@surface0, 0.45);
+        margin-left: 2px;
+        padding-left: 12px;
+      }
+
+      #tray {
+        border-left: 1px solid alpha(@surface0, 0.45);
+        margin-left: 2px;
+        padding-left: 12px;
+        padding-right: 4px;
+      }
+
+      /* ── Workspaces ───────────────────────────────────────────── */
+      #workspaces {
+        padding: 0 2px;
       }
 
       #workspaces button {
-        background-color: transparent;
-        color: @fg-dim;
-        padding: 0 10px;
-        min-width: 28px;
-        border-bottom: 2px solid transparent;
+        color: @overlay1;
+        background: transparent;
+        padding: 0 7px;
+        margin: 5px 2px;
+        border-radius: 5px;
+        border: 1px solid transparent;
+        font-size: 12px;
+        min-width: 0;
         transition: all 0.15s ease;
       }
 
       #workspaces button:hover {
-        background-color: @overlay;
-        color: @fg;
-        border-radius: 8px;
+        color: @text;
+        background: alpha(@surface0, 0.55);
+        border-color: alpha(@surface1, 0.5);
+        box-shadow:
+          0 1px 0 alpha(@overlay0, 0.1) inset,
+          0 2px 6px alpha(@crust, 0.5);
       }
 
       #workspaces button.active {
-        background-color: @blue;
-        color: @bg;
-        border-radius: 8px;
+        color: @mauve;
+        background: alpha(@surface0, 0.75);
+        border-color: alpha(@mauve, 0.30);
+        font-weight: 700;
+        box-shadow:
+          0 0  8px alpha(@mauve, 0.18),
+          0 1px 0  alpha(@lavender, 0.18) inset,
+          0 2px 6px alpha(@crust, 0.55);
       }
 
       #workspaces button.urgent {
-        background-color: @red;
-        color: @bg;
-        border-radius: 8px;
+        color: @red;
+        border-color: alpha(@red, 0.4);
+        animation: blink 1s ease infinite;
       }
 
-      /* ── 窗口標題 ── */
+      @keyframes blink {
+        0%, 100% { box-shadow: 0 0  4px alpha(@red, 0.3); }
+        50%       { box-shadow: 0 0 12px alpha(@red, 0.6); }
+      }
+
+      /* ── Window title ─────────────────────────────────────────── */
       #window {
-        background-color: @surface;
-        color: @fg-dim;
-        padding: 0 14px;
-        border-radius: 10px;
-        font-weight: 500;
+        color: @overlay2;
         font-size: 12px;
-        margin-left: 0;
-      }
-
-      /* ── 中央時鐘 ── */
-      #clock {
-        background-color: @surface;
-        color: @blue;
-        font-size: 14px;
-        font-weight: 700;
-        padding: 0 22px;
-        border-radius: 10px;
-        letter-spacing: 1px;
-        border: 1px solid @border;
-        min-width: 120px;
-      }
-
-      /* ── 右側模組通用 ── */
-      #custom-music,
-      #cpu,
-      #memory,
-      #pulseaudio,
-      #network {
-        background-color: @surface;
-        color: @fg;
-        padding: 0 14px;
-        margin-left: 4px;
-        border-radius: 10px;
-      }
-
-      /* ── 音樂 ── */
-      #custom-music {
-        color: @purple;
-        background-color: @bg1;
-        border: 1px solid @border;
-      }
-
-      #custom-music.paused {
-        color: @fg-dim;
-      }
-
-      #custom-music.stopped {
-        color: @fg-dim;
         font-style: italic;
+        border-left: 1px solid alpha(@surface0, 0.45);
+        margin-left: 2px;
+        padding-left: 12px;
       }
 
-      /* ── CPU ── */
-      #cpu {
-        color: @cyan;
+      /* ── Clock ────────────────────────────────────────────────── */
+      #clock {
+        color: @lavender;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 0.5px;
       }
 
-      #cpu.warning {
-        color: @yellow;
+      /* ── Right modules 顏色 ───────────────────────────────────── */
+      #pulseaudio           { color: @teal;     }
+      #pulseaudio.muted     { color: @overlay0; }
+      #network              { color: @sapphire; }
+      #network.disconnected { color: @red;      }
+      #battery              { color: @green;    }
+      #battery.warning      { color: @yellow;   }
+      #battery.critical     { color: @red;      }
+      #battery.charging     { color: @green;    }
+      #cpu                  { color: @peach;    }
+      #memory               { color: @pink;     }
+      #tray                 { color: @overlay1; }
+
+      /* hover 時統一提亮 */
+      #pulseaudio:hover,
+      #network:hover,
+      #battery:hover,
+      #cpu:hover,
+      #memory:hover {
+        color: @text;
       }
 
-      #cpu.critical {
-        color: @red;
-        animation: blink 1s step-end infinite;
-      }
-
-      /* ── 記憶體 ── */
-      #memory {
-        color: @green;
-      }
-
-      #memory.warning {
-        color: @yellow;
-      }
-
-      #memory.critical {
-        color: @red;
-      }
-
-      /* ── 音量 ── */
-      #pulseaudio {
-        color: @blue;
-      }
-
-      #pulseaudio.muted {
-        color: @fg-dim;
-      }
-
-      /* ── 網路 ── */
-      #network {
-        color: @cyan;
-      }
-
-      #network.disconnected {
-        color: @red;
-      }
-
-      /* ── 托盤 ── */
-      #tray {
-        background-color: @surface;
-        border-radius: 10px;
-        padding: 0 10px;
-        margin-left: 4px;
-      }
-
-      #tray > .passive {
-        -gtk-icon-effect: dim;
-      }
-
+      #tray > .passive         { -gtk-icon-effect: dim; }
       #tray > .needs-attention {
         -gtk-icon-effect: highlight;
-        color: @red;
-      }
-
-      /* ── Tooltip ── */
-      tooltip {
-        background-color: @bg;
-        border: 1px solid @border;
-        border-radius: 10px;
-        color: @fg;
-        padding: 6px 10px;
-      }
-
-      tooltip label {
-        color: @fg;
-        font-weight: 500;
-      }
-
-      /* ── Blink animation ── */
-      @keyframes blink {
-        50% { opacity: 0.4; }
+        background: alpha(@red, 0.18);
+        border-radius: 4px;
       }
     '';
   };
-
-  # 音樂腳本
-  home.file.".config/waybar/scripts/music.sh" = {
-    executable = true;
-    text = ''
-      #!/usr/bin/env bash
-      if ! playerctl status &>/dev/null; then
-        echo '{"text":"  no music","class":"stopped","tooltip":"No player"}'
-        exit 0
-      fi
-
-      STATUS=$(playerctl status 2>/dev/null)
-      case "$STATUS" in
-        Playing) ICON="󰎈"; CLASS="playing" ;;
-        Paused)  ICON="󰏤"; CLASS="paused"  ;;
-        *)       ICON="󰐎"; CLASS="stopped" ;;
-      esac
-
-      TITLE=$(playerctl metadata title  2>/dev/null | sed 's/&/and/g')
-      ARTIST=$(playerctl metadata artist 2>/dev/null | sed 's/&/and/g')
-
-      [ -z "$TITLE" ] && {
-        echo '{"text":"  no music","class":"stopped","tooltip":"Nothing playing"}'
-        exit 0
-      }
-
-      [ ''${#TITLE}  -gt 25 ] && TITLE="''${TITLE:0:22}..."
-      [ ''${#ARTIST} -gt 15 ] && ARTIST="''${ARTIST:0:12}..."
-
-      if [ -n "$ARTIST" ]; then
-        TEXT="$ICON  $TITLE — $ARTIST"
-        TOOLTIP="$TITLE\n$ARTIST"
-      else
-        TEXT="$ICON  $TITLE"
-        TOOLTIP="$TITLE"
-      fi
-
-      echo "{\"text\":\"$TEXT\",\"class\":\"$CLASS\",\"tooltip\":\"$TOOLTIP\"}"
-    '';
-  };
-
-  home.packages = with pkgs; [
-    playerctl
-  ];
 }
