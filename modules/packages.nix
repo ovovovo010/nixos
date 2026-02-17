@@ -70,5 +70,6 @@
      vesktop
      wf-recorder
      r2modman
+     code-cursor
   ];
 }
