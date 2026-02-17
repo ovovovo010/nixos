@@ -89,7 +89,7 @@
 
         # 特殊工作區
         "$mainMod, S, togglespecialworkspace, magic"
-        "$mainMod SHIFT, S, movetoworkspace, special:magic"
+        "$mainMod SHIFT, S, exec, hyprshot -m region --output-folder ~/Pictures/screenshots"
 
         # 滑鼠滾輪切換 workspace
         "$mainMod, mouse_down, workspace, e+1"
