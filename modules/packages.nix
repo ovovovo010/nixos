@@ -64,5 +64,8 @@
      swaynotificationcenter
      yazi
      heroic
+     qpwgraph
+     easyeffects
+     docker
   ];
 }
