@@ -150,7 +150,7 @@
 	 "fcitx5 -d"
         # "~/.config/hypr/scripts/init.sh &"  # 自訂腳本
 	"swww-daemon --format xrgb"
-        "swww img /home/eric/Pictures/wallpapers/wp6475014-city-ultra-hd-wallpapers.jpg --transition-type fade --tansition-duration 2"
+        "swww img /home/eric/Pictures/wallpapers/tokyo_night_city_skyscrapers_121628_3840x2160.jpg --transition-type fade --tansition-duration 2"
       ];
 
       # 如果需要每次 reload 都跑的（很少用）
