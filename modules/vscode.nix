@@ -51,6 +51,8 @@
     ];
 
     profiles.default.userSettings = {
+
+      "locale" = "zh-TW";
       # 編輯器外觀
       "workbench.colorTheme" = "One Dark Pro";
       "workbench.iconTheme" = "material-icon-theme";
