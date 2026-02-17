@@ -18,6 +18,13 @@
     Type=Application
   '';
 
+  environment.etc."greetd/sessions/openbox.desktop".text = ''
+  [Desktop Entry]
+  Name=Openbox
+  Exec=openbox-session
+  Type=Application
+'';
+
   systemd.services.greetd.serviceConfig = {
     Type = "idle";
     StandardInput = "tty";
