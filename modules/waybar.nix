@@ -153,17 +153,15 @@
     };
 
     style = ''
-      /* ── Tokyo Night 厚塗風 ── */
+      /* ── Tokyo Night 漂浮圓角風 ── */
       @define-color bg        #1a1b2e;
       @define-color bg1       #16213e;
-      @define-color bg2       #0f3460;
       @define-color surface   #24283b;
       @define-color overlay   #292e42;
       @define-color blue      #7aa2f7;
       @define-color cyan      #7dcfff;
       @define-color purple    #bb9af7;
       @define-color red       #f7768e;
-      @define-color orange    #ff9e64;
       @define-color yellow    #e0af68;
       @define-color green     #9ece6a;
       @define-color fg        #c0caf5;
@@ -181,11 +179,16 @@
         margin: 0;
       }
 
-      /* ── Bar 主體 ── */
+      /* ── Bar 主體：透明背景，讓模組漂浮 ── */
       window#waybar {
-        background-color: @bg;
-        border-bottom: 2px solid @border;
+        background-color: transparent;
         color: @fg;
+      }
+
+      .modules-left,
+      .modules-center,
+      .modules-right {
+        margin: 6px 8px;
       }
 
       /* ── 左側：Logo ── */
@@ -194,14 +197,16 @@
         color: @bg;
         padding: 0 14px;
         font-size: 16px;
-        border-right: 2px solid @bg2;
+        border-radius: 10px 0 0 10px;
+        margin-right: 0;
       }
 
       /* ── 工作區 ── */
       #workspaces {
         background-color: @surface;
-        border-right: 2px solid @overlay;
-        padding: 0 4px;
+        border-radius: 0 10px 10px 0;
+        padding: 0 6px;
+        margin-right: 6px;
       }
 
       #workspaces button {
@@ -216,39 +221,42 @@
       #workspaces button:hover {
         background-color: @overlay;
         color: @fg;
-        border-bottom: 2px solid @blue;
+        border-radius: 8px;
       }
 
       #workspaces button.active {
-        background-color: @overlay;
-        color: @blue;
-        border-bottom: 2px solid @blue;
+        background-color: @blue;
+        color: @bg;
+        border-radius: 8px;
       }
 
       #workspaces button.urgent {
-        color: @red;
-        border-bottom: 2px solid @red;
+        background-color: @red;
+        color: @bg;
+        border-radius: 8px;
       }
 
       /* ── 窗口標題 ── */
       #window {
-        background-color: transparent;
+        background-color: @surface;
         color: @fg-dim;
         padding: 0 14px;
+        border-radius: 10px;
         font-weight: 500;
         font-size: 12px;
+        margin-left: 0;
       }
 
       /* ── 中央時鐘 ── */
       #clock {
-        background-color: @bg;
+        background-color: @surface;
         color: @blue;
         font-size: 14px;
         font-weight: 800;
-        padding: 0 20px;
+        padding: 0 22px;
+        border-radius: 10px;
         letter-spacing: 1px;
-        border-left: 2px solid @surface;
-        border-right: 2px solid @surface;
+        border: 1px solid @border;
       }
 
       /* ── 右側模組通用 ── */
@@ -256,24 +264,19 @@
       #cpu,
       #memory,
       #pulseaudio,
-      #network,
-      #tray {
+      #network {
         background-color: @surface;
         color: @fg;
         padding: 0 14px;
-        border-left: 1px solid @overlay;
+        margin-left: 4px;
+        border-radius: 10px;
       }
 
       /* ── 音樂 ── */
       #custom-music {
         color: @purple;
         background-color: @bg1;
-        border-left: 2px solid @border;
-        max-width: 200px;
-      }
-
-      #custom-music.playing {
-        color: @purple;
+        border: 1px solid @border;
       }
 
       #custom-music.paused {
@@ -332,8 +335,10 @@
 
       /* ── 托盤 ── */
       #tray {
+        background-color: @surface;
+        border-radius: 10px;
         padding: 0 10px;
-        border-left: 2px solid @border;
+        margin-left: 4px;
       }
 
       #tray > .passive {
@@ -349,6 +354,7 @@
       tooltip {
         background-color: @bg;
         border: 1px solid @border;
+        border-radius: 10px;
         color: @fg;
         padding: 6px 10px;
       }
