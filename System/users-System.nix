@@ -13,7 +13,8 @@
       "libvirtd" 
       "video" 
       "render" 
-      "networkmanager" 
+      "networkmanager"
+      "docker"
     ];
     # 如果這裡有定義 packages，確保結尾有分號
     packages = with pkgs; [ ];

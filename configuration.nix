@@ -41,6 +41,11 @@
   "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"  # 清華鏡像
   "https://cache.nixos.org/"  # 官方源作為備用
 ];
+  
+   virtualisation.docker = {
+     enable = true;
+     enableNvidia = true;
+};
 
 
   
