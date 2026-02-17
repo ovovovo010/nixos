@@ -67,5 +67,6 @@
      qpwgraph
      easyeffects
      docker
+     vesktop
   ];
 }
