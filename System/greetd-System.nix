@@ -21,7 +21,7 @@
   environment.etc."greetd/sessions/openbox.desktop".text = ''
   [Desktop Entry]
   Name=Openbox
-  Exec=openbox-session
+  Exec=${pkgs.xorg.xinit}/bin/startx ${pkgs.openbox}/bin/openbox-session
   Type=Application
 '';
 
