@@ -6,7 +6,7 @@
     settings = {
       default_session = {
         # 使用 tuigreet 作為介面，並預設啟動 Hyprland
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+	command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --sessions ${pkgs.xorg.xinit}/share/xsessions";
         user = "eric";
       };
     };
