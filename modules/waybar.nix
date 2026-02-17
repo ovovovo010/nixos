@@ -1,54 +1,40 @@
 { config, pkgs, lib, ... }:
-
 {
   programs.waybar = {
     enable = true;
-    
+
     settings = {
       mainBar = {
         layer = "top";
         position = "top";
-        height = 40;
-        spacing = 8;
-        
+        height = 36;
+        spacing = 0;
+        exclusive = true;
+        passthrough = false;
+
         modules-left = [
-          "custom/cat"
+          "custom/logo"
           "hyprland/workspaces"
           "hyprland/window"
         ];
-        
+
         modules-center = [
-          "custom/music"
+          "clock"
         ];
-        
+
         modules-right = [
-          "pulseaudio"
-          "network"
+          "custom/music"
           "cpu"
           "memory"
-          "battery"
-          "clock"
+          "pulseaudio"
+          "network"
           "tray"
         ];
 
-        # 🐱 8bit 小貓常駐！
-        "custom/cat" = {
-          format = "ฅ^•ﻌ•^ฅ";
+        # Logo
+        "custom/logo" = {
+          format = "  ";
           tooltip = false;
-          on-click = "notify-send '🐱 Nya~' 'Meow meow! (=^･ω･^=)'";
-        };
-
-        # 🎵 音樂播放器
-        "custom/music" = {
-          format = "{}";
-          max-length = 60;
-          interval = 1;
-          exec = "~/.config/waybar/scripts/music.sh";
-          on-click = "playerctl play-pause";
-          on-scroll-up = "playerctl next";
-          on-scroll-down = "playerctl previous";
-          return-type = "json";
-          escape = true;
         };
 
         # Hyprland 工作區
@@ -65,6 +51,8 @@
             "8" = "八";
             "9" = "九";
             "10" = "十";
+            urgent = "";
+            default = "○";
           };
           on-scroll-up = "hyprctl dispatch workspace e+1";
           on-scroll-down = "hyprctl dispatch workspace e-1";
@@ -75,80 +63,29 @@
 
         # 當前窗口標題
         "hyprland/window" = {
-          format = "{}";
-          max-length = 50;
+          format = "  {}";
+          max-length = 40;
           separate-outputs = true;
-        };
-
-        # 音量
-        "pulseaudio" = {
-          format = "{icon} {volume}%";
-          format-muted = "  Muted";
-          format-icons = {
-            headphone = "";
-            hands-free = "";
-            headset = "";
-            phone = "";
-            portable = "";
-            car = "";
-            default = ["" "" ""];
+          rewrite = {
+            "(.*) — Mozilla Firefox" = "  $1";
+            "(.*) - fish" = "  $1";
+            "(.*) - nvim" = "  $1";
           };
-          on-click = "pavucontrol";
-          scroll-step = 5;
         };
 
-        # 網路
-        "network" = {
-          format-wifi = "  {essid}";
-          format-ethernet = "  {ipaddr}";
-          format-disconnected = "  Disconnected";
-          tooltip-format = "{ifname}: {ipaddr}/{cidr}";
-          on-click = "nm-connection-editor";
-        };
-
-        # CPU
-        "cpu" = {
-          format = "  {usage}%";
-          tooltip = true;
-          interval = 2;
-        };
-
-        # 記憶體
-        "memory" = {
-          format = "  {}%";
-          tooltip-format = "{used:0.1f}G / {total:0.1f}G";
-          interval = 2;
-        };
-
-        # 電池
-        "battery" = {
-          states = {
-            warning = 30;
-            critical = 15;
-          };
-          format = "{icon} {capacity}%";
-          format-charging = "  {capacity}%";
-          format-plugged = "  {capacity}%";
-          format-icons = ["" "" "" "" ""];
-          tooltip-format = "{timeTo}";
-        };
-
-        # 時鐘
+        # 時鐘（中央）
         "clock" = {
           format = "  {:%H:%M}";
-          format-alt = "  {:%Y-%m-%d %H:%M:%S}";
+          format-alt = "  {:%a %b %d, %Y}";
           tooltip-format = "<tt><small>{calendar}</small></tt>";
           calendar = {
             mode = "month";
-            mode-mon-col = 3;
-            weeks-pos = "right";
             on-scroll = 1;
             format = {
-              months = "<span color='#b794f6'><b>{}</b></span>";
-              days = "<span color='#e9d5ff'>{}</span>";
-              weeks = "<span color='#a78bfa'>W{}</span>";
-              weekdays = "<span color='#c4b5fd'><b>{}</b></span>";
-              today = "<span color='#7c3aed'><b><u>{}</u></b></span>";
+              months = "<span color='#7aa2f7'><b>{}</b></span>";
+              days = "<span color='#a9b1d6'>{}</span>";
+              weekdays = "<span color='#7dcfff'><b>{}</b></span>";
+              today = "<span color='#f7768e'><b><u>{}</u></b></span>";
             };
           };
           actions = {
@@ -158,192 +95,245 @@
           };
         };
 
+        # 🎵 音樂播放器
+        "custom/music" = {
+          format = "{}";
+          max-length = 40;
+          interval = 2;
+          exec = "~/.config/waybar/scripts/music.sh";
+          on-click = "playerctl play-pause";
+          on-scroll-up = "playerctl next";
+          on-scroll-down = "playerctl previous";
+          return-type = "json";
+          escape = true;
+        };
+
+        # CPU
+        "cpu" = {
+          format = "  {usage}%";
+          tooltip-format = "CPU: {usage}%\nLoad: {load}";
+          interval = 2;
+        };
+
+        # 記憶體
+        "memory" = {
+          format = "  {percentage}%";
+          tooltip-format = "{used:0.1f}G / {total:0.1f}G";
+          interval = 2;
+        };
+
+        # 音量
+        "pulseaudio" = {
+          format = "{icon} {volume}%";
+          format-muted = "  muted";
+          format-icons = {
+            headphone = "";
+            headset = "";
+            default = [ "" "" "" ];
+          };
+          on-click = "pavucontrol";
+          scroll-step = 5;
+        };
+
+        # 網路
+        "network" = {
+          format-wifi = "  {essid}";
+          format-ethernet = "  {ipaddr}";
+          format-disconnected = "  offline";
+          tooltip-format = "{ifname}: {ipaddr}/{cidr}\n{gwaddr}";
+          on-click = "nm-connection-editor";
+        };
+
         # 系統托盤
         "tray" = {
-          icon-size = 18;
-          spacing = 8;
+          icon-size = 16;
+          spacing = 6;
         };
       };
     };
 
     style = ''
+      /* ── Tokyo Night 厚塗風 ── */
+      @define-color bg        #1a1b2e;
+      @define-color bg1       #16213e;
+      @define-color bg2       #0f3460;
+      @define-color surface   #24283b;
+      @define-color overlay   #292e42;
+      @define-color blue      #7aa2f7;
+      @define-color cyan      #7dcfff;
+      @define-color purple    #bb9af7;
+      @define-color red       #f7768e;
+      @define-color orange    #ff9e64;
+      @define-color yellow    #e0af68;
+      @define-color green     #9ece6a;
+      @define-color fg        #c0caf5;
+      @define-color fg-dim    #565f89;
+      @define-color border    #3d59a1;
+
       * {
-        font-family: "JetBrains Mono", "Noto Sans CJK TC", sans-serif;
+        font-family: "JetBrains Mono Nerd Font", "Noto Sans CJK TC", monospace;
         font-size: 13px;
-        font-weight: 600;
+        font-weight: 700;
         border: none;
         border-radius: 0;
         min-height: 0;
+        padding: 0;
+        margin: 0;
       }
 
+      /* ── Bar 主體 ── */
       window#waybar {
-        background-color: rgba(26, 22, 37, 0.9);
-        border-bottom: 3px solid #7c3aed;
-        color: #e9d5ff;
-        transition-property: background-color;
-        transition-duration: 0.5s;
+        background-color: @bg;
+        border-bottom: 2px solid @border;
+        color: @fg;
       }
 
-      /* 可愛的小貓模組 */
-      #custom-cat {
-        background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
-        color: #ffffff;
-        padding: 0 16px;
-        margin: 4px 0px 4px 8px;
-        border-radius: 12px;
+      /* ── 左側：Logo ── */
+      #custom-logo {
+        background-color: @blue;
+        color: @bg;
+        padding: 0 14px;
         font-size: 16px;
-        transition: all 0.3s ease;
+        border-right: 2px solid @bg2;
       }
 
-      #custom-cat:hover {
-        background: linear-gradient(90deg, #fcd34d 0%, #fbbf24 100%);
-      }
-
-      /* 超可愛的音樂播放器 */
-      #custom-music {
-        background: linear-gradient(90deg, #ec4899 0%, #f472b6 100%);
-        color: #ffffff;
-        padding: 0 16px;
-        margin: 4px 8px;
-        border-radius: 12px;
-        font-size: 13px;
-        transition: all 0.3s ease;
-      }
-
-      #custom-music:hover {
-        background: linear-gradient(90deg, #f472b6 0%, #ec4899 100%);
-      }
-
-      /* 工作區 */
+      /* ── 工作區 ── */
       #workspaces {
-        background-color: transparent;
-        margin: 4px 4px;
+        background-color: @surface;
+        border-right: 2px solid @overlay;
+        padding: 0 4px;
       }
 
       #workspaces button {
-        background-color: rgba(124, 58, 237, 0.3);
-        color: #c4b5fd;
-        padding: 0 12px;
-        margin: 0 2px;
-        border-radius: 12px;
-        transition: all 0.3s ease;
+        background-color: transparent;
+        color: @fg-dim;
+        padding: 0 10px;
+        min-width: 28px;
+        border-bottom: 2px solid transparent;
+        transition: all 0.15s ease;
       }
 
       #workspaces button:hover {
-        background-color: rgba(124, 58, 237, 0.5);
-        color: #e9d5ff;
+        background-color: @overlay;
+        color: @fg;
+        border-bottom: 2px solid @blue;
       }
 
       #workspaces button.active {
-        background: linear-gradient(90deg, #7c3aed 0%, #b794f6 100%);
-        color: #ffffff;
+        background-color: @overlay;
+        color: @blue;
+        border-bottom: 2px solid @blue;
       }
 
       #workspaces button.urgent {
-        background-color: #f87171;
-        color: #ffffff;
+        color: @red;
+        border-bottom: 2px solid @red;
       }
 
-      /* 窗口標題 */
+      /* ── 窗口標題 ── */
       #window {
         background-color: transparent;
-        color: #a78bfa;
-        padding: 0 16px;
+        color: @fg-dim;
+        padding: 0 14px;
         font-weight: 500;
+        font-size: 12px;
       }
 
-      /* 右側模組通用樣式 */
-      #pulseaudio,
-      #network,
+      /* ── 中央時鐘 ── */
+      #clock {
+        background-color: @bg;
+        color: @blue;
+        font-size: 14px;
+        font-weight: 800;
+        padding: 0 20px;
+        letter-spacing: 1px;
+        border-left: 2px solid @surface;
+        border-right: 2px solid @surface;
+      }
+
+      /* ── 右側模組通用 ── */
+      #custom-music,
       #cpu,
       #memory,
-      #battery,
-      #clock,
+      #pulseaudio,
+      #network,
       #tray {
-        background-color: rgba(45, 27, 78, 0.8);
-        color: #e9d5ff;
-        padding: 0 16px;
-        margin: 4px 2px;
-        border-radius: 12px;
-        transition: all 0.3s ease;
+        background-color: @surface;
+        color: @fg;
+        padding: 0 14px;
+        border-left: 1px solid @overlay;
       }
 
-      #pulseaudio:hover,
-      #network:hover,
-      #cpu:hover,
-      #memory:hover,
-      #battery:hover,
-      #clock:hover {
-        background-color: rgba(124, 58, 237, 0.6);
-        border-bottom: 2px solid #b794f6;
+      /* ── 音樂 ── */
+      #custom-music {
+        color: @purple;
+        background-color: @bg1;
+        border-left: 2px solid @border;
+        max-width: 200px;
       }
 
-      /* 音量特殊顏色 */
-      #pulseaudio {
-        background: linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%);
+      #custom-music.playing {
+        color: @purple;
       }
 
-      #pulseaudio.muted {
-        background-color: rgba(248, 113, 113, 0.6);
-        color: #ffffff;
+      #custom-music.paused {
+        color: @fg-dim;
       }
 
-      /* 網路狀態 */
-      #network.disconnected {
-        background-color: rgba(248, 113, 113, 0.6);
-        color: #ffffff;
+      #custom-music.stopped {
+        color: @fg-dim;
+        font-style: italic;
       }
 
-      /* CPU 警告 */
+      /* ── CPU ── */
+      #cpu {
+        color: @cyan;
+      }
+
       #cpu.warning {
-        background-color: rgba(251, 191, 36, 0.8);
-        color: #ffffff;
+        color: @yellow;
       }
 
       #cpu.critical {
-        background-color: rgba(248, 113, 113, 0.8);
-        color: #ffffff;
+        color: @red;
+        animation: blink 1s step-end infinite;
       }
 
-      /* 記憶體警告 */
+      /* ── 記憶體 ── */
+      #memory {
+        color: @green;
+      }
+
       #memory.warning {
-        background-color: rgba(251, 191, 36, 0.8);
-        color: #ffffff;
+        color: @yellow;
       }
 
       #memory.critical {
-        background-color: rgba(248, 113, 113, 0.8);
-        color: #ffffff;
+        color: @red;
       }
 
-      /* 電池狀態 */
-      #battery.charging {
-        background: linear-gradient(90deg, #34d399 0%, #10b981 100%);
-        color: #ffffff;
+      /* ── 音量 ── */
+      #pulseaudio {
+        color: @blue;
       }
 
-      #battery.warning {
-        background-color: rgba(251, 191, 36, 0.8);
-        color: #ffffff;
+      #pulseaudio.muted {
+        color: @fg-dim;
       }
 
-      #battery.critical {
-        background-color: rgba(248, 113, 113, 0.8);
-        color: #ffffff;
+      /* ── 網路 ── */
+      #network {
+        color: @cyan;
       }
 
-      /* 時鐘特殊樣式 */
-      #clock {
-        background: linear-gradient(90deg, #7c3aed 0%, #b794f6 100%);
-        color: #ffffff;
-        font-weight: 700;
-        margin-right: 8px;
+      #network.disconnected {
+        color: @red;
       }
 
-      /* 托盤 */
+      /* ── 托盤 ── */
       #tray {
-        background-color: rgba(45, 27, 78, 0.8);
-        margin-right: 8px;
+        padding: 0 10px;
+        border-left: 2px solid @border;
       }
 
       #tray > .passive {
@@ -352,82 +342,70 @@
 
       #tray > .needs-attention {
         -gtk-icon-effect: highlight;
-        background-color: #f87171;
+        color: @red;
       }
 
-      /* 滑鼠滑過整體效果 */
+      /* ── Tooltip ── */
       tooltip {
-        background-color: rgba(26, 22, 37, 0.95);
-        border: 2px solid #7c3aed;
-        border-radius: 12px;
-        color: #e9d5ff;
-        padding: 8px;
+        background-color: @bg;
+        border: 1px solid @border;
+        color: @fg;
+        padding: 6px 10px;
       }
 
       tooltip label {
-        color: #e9d5ff;
+        color: @fg;
+        font-weight: 500;
+      }
+
+      /* ── Blink animation ── */
+      @keyframes blink {
+        50% { opacity: 0.4; }
       }
     '';
   };
 
-  # 創建音樂腳本
+  # 音樂腳本
   home.file.".config/waybar/scripts/music.sh" = {
     executable = true;
     text = ''
       #!/usr/bin/env bash
-
-      # 檢查是否有音樂在播放
-      if ! playerctl status &> /dev/null; then
-        echo '{"text": "♪ No Music", "class": "stopped", "tooltip": "No player found"}'
+      if ! playerctl status &>/dev/null; then
+        echo '{"text":"  no music","class":"stopped","tooltip":"No player"}'
         exit 0
       fi
 
       STATUS=$(playerctl status 2>/dev/null)
-      
-      if [ "$STATUS" = "Playing" ]; then
-        ICON="󰎈"
-        CLASS="playing"
-      elif [ "$STATUS" = "Paused" ]; then
-        ICON="󰏤"
-        CLASS="paused"
-      else
-        ICON="󰐎"
-        CLASS="stopped"
-      fi
+      case "$STATUS" in
+        Playing) ICON="󰎈"; CLASS="playing" ;;
+        Paused)  ICON="󰏤"; CLASS="paused"  ;;
+        *)       ICON="󰐎"; CLASS="stopped" ;;
+      esac
 
-      # 取得歌曲資訊
+      TITLE=$(playerctl metadata title  2>/dev/null | sed 's/&/and/g')
       ARTIST=$(playerctl metadata artist 2>/dev/null | sed 's/&/and/g')
-      TITLE=$(playerctl metadata title 2>/dev/null | sed 's/&/and/g')
-      
-      if [ -z "$TITLE" ]; then
-        echo '{"text": "♪ No Music", "class": "stopped", "tooltip": "Nothing playing"}'
+
+      [ -z "$TITLE" ] && {
+        echo '{"text":"  no music","class":"stopped","tooltip":"Nothing playing"}'
         exit 0
-      fi
+      }
 
-      # 限制長度
-      if [ ''${#TITLE} -gt 30 ]; then
-        TITLE="''${TITLE:0:27}..."
-      fi
-      
-      if [ ''${#ARTIST} -gt 20 ]; then
-        ARTIST="''${ARTIST:0:17}..."
-      fi
+      [ ''${#TITLE}  -gt 25 ] && TITLE="''${TITLE:0:22}..."
+      [ ''${#ARTIST} -gt 15 ] && ARTIST="''${ARTIST:0:12}..."
 
-      # 可愛的格式
       if [ -n "$ARTIST" ]; then
-        TEXT="$ICON $TITLE ♡ $ARTIST"
-        TOOLTIP="Now Playing:\n$TITLE\nby $ARTIST"
+        TEXT="$ICON  $TITLE — $ARTIST"
+        TOOLTIP="$TITLE\n$ARTIST"
       else
-        TEXT="$ICON $TITLE"
-        TOOLTIP="Now Playing:\n$TITLE"
+        TEXT="$ICON  $TITLE"
+        TOOLTIP="$TITLE"
       fi
 
-      echo "{\"text\": \"$TEXT\", \"class\": \"$CLASS\", \"tooltip\": \"$TOOLTIP\"}"
+      echo "{\"text\":\"$TEXT\",\"class\":\"$CLASS\",\"tooltip\":\"$TOOLTIP\"}"
     '';
   };
 
-  # 必要套件
   home.packages = with pkgs; [
-    playerctl  # 音樂控制
+    playerctl
   ];
 }
