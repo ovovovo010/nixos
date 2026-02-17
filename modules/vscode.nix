@@ -5,7 +5,7 @@
     enable = true;
     package = pkgs.vscode;
 
-    extensions = with pkgs.vscode-extensions; [
+    profiles.default.extensions = with pkgs.vscode-extensions; [
       # 語言支援
       ms-python.python
       ms-python.vscode-pylance
@@ -46,11 +46,11 @@
         name = "catppuccin-vsc";
         publisher = "Catppuccin";
         version = "3.15.0";
-        sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+        sha256 = "sha256-S7vyyiJAIRi+jgaNHQs+wBo/8IiP0YuJ1RI1IiQdLRA=";
       }
     ];
 
-    userSettings = {
+    profiles.default.userSettings = {
       # 編輯器外觀
       "workbench.colorTheme" = "One Dark Pro";
       "workbench.iconTheme" = "material-icon-theme";
@@ -140,7 +140,7 @@
       "update.mode" = "none";
     };
 
-    keybindings = [
+    profiles.default.keybindings = [
       {
         key = "ctrl+shift+t";
         command = "workbench.action.terminal.new";
