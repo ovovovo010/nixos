@@ -275,8 +275,9 @@
       }
 
       @keyframes blink {
-        0%, 100% { box-shadow: 0 0  4px alpha(@red, 0.3); }
-        50%       { box-shadow: 0 0 12px alpha(@red, 0.6); }
+        0%   { color: @red; }
+        50%  { color: alpha(@red, 0.4); }
+        100% { color: @red; }
       }
 
       /* ── Window title ─────────────────────────────────────────── */
