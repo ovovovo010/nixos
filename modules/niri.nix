@@ -164,7 +164,6 @@
     niri                    # Niri Wayland 合成器
     kitty                   # 終端機
     rofi                    # 應用程式啟動器
-    thunar                  # 檔案管理器
     brightnessctl           # 亮度控制
     wl-clipboard            # Wayland 剪貼簿
     playerctl               # 媒體控制
