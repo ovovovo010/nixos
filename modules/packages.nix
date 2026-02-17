@@ -69,5 +69,6 @@
      docker
      vesktop
      wf-recorder
+     r2modman
   ];
 }
