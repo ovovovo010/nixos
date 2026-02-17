@@ -1,12 +1,13 @@
 { config, pkgs, ... }:
 
 {
-  xdg.configFile."niri/config.kdl".text = ''
+  xdg.configFile."niri/config.kdl" = {
+    force = true;
+    text = ''
     input {
       keyboard {
         xkb {
           layout "us"
-          options ""
         }
         repeat-delay 600
         repeat-rate 25
@@ -80,17 +81,18 @@
       Mod+Shift+5 { move-window-to-workspace 5; }
 
       // 媒體鍵
-      XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "-l" "1" "@DEFAULT_AUDIO_SINK@" "5%+"; }
-      XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
-      XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-      XF86MonBrightnessUp { spawn "brightnessctl" "-e4" "-n2" "set" "5%+"; }
-      XF86MonBrightnessDown { spawn "brightnessctl" "-e4" "-n2" "set" "5%-"; }
+      XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
+      XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+      XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+      XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+      XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
     }
 
     environment {
       XCURSOR_SIZE "24"
     }
   '';
+  };
 
   home.packages = with pkgs; [
     kitty
