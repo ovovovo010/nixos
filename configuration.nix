@@ -42,12 +42,10 @@
   "https://cache.nixos.org/"  # 官方源作為備用
 ];
   
-   virtualisation.docker = {
-     enable = true;
-     enableNvidia = true;
+  virtualisation.docker = {
+    enable = true;
 };
-
-
+  hardware.nvidia-container-toolkit.enable = true;
   
 
    services.pipewire = {

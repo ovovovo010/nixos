@@ -8,11 +8,11 @@ programs.spicetify = {
     enable = true;
     
     # 確保這兩個變數路徑正確
-    theme = inputs.spicetify-nix.legacyPackages.${pkgs.system}.themes.catppuccin;
+    theme = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system}.themes.catppuccin;
     colorScheme = "macchiato"; 
 
     enabledExtensions = let
-      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
     in [
   #    spicePkgs.extensions.marketplace
       spicePkgs.extensions.adblock
