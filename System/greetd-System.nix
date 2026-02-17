@@ -18,12 +18,7 @@
     Type=Application
   '';
 
-  environment.etc."greetd/sessions/openbox.desktop".text = ''
-  [Desktop Entry]
-  Name=Openbox
-  Exec=${pkgs.xorg.xinit}/bin/startx ${pkgs.openbox}/bin/openbox-session
-  Type=Application
-'';
+ 
 
   systemd.services.greetd.serviceConfig = {
     Type = "idle";
