@@ -11,6 +11,7 @@
         spacing = 0;
         exclusive = true;
         passthrough = false;
+        fixed-center = true;
 
         modules-left = [
           "custom/logo"
@@ -169,9 +170,9 @@
       @define-color border    #3d59a1;
 
       * {
-        font-family: "JetBrains Mono Nerd Font", "Noto Sans CJK TC", monospace;
+        font-family: "JetBrainsMono Nerd Font", "Noto Sans CJK TC", monospace;
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 500;
         border: none;
         border-radius: 0;
         min-height: 0;
@@ -252,11 +253,12 @@
         background-color: @surface;
         color: @blue;
         font-size: 14px;
-        font-weight: 800;
+        font-weight: 700;
         padding: 0 22px;
         border-radius: 10px;
         letter-spacing: 1px;
         border: 1px solid @border;
+        min-width: 120px;
       }
 
       /* ── 右側模組通用 ── */
