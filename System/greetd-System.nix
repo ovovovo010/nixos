@@ -18,6 +18,13 @@
     Type=Application
   '';
 
+     environment.etc."greetd/sessions/niri.desktop".text = ''
+    [Desktop Entry]
+    Name=Niri
+    Exec=niri
+    Type=Application
+  '';
+
  
 
   systemd.services.greetd.serviceConfig = {

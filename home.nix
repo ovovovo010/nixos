@@ -20,6 +20,7 @@
     ./modules/spicetify.nix
     ./modules/obs.nix
     ./modules/vscode.nix
+    ./modules/niri.nix
 
 
   ];
