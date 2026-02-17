@@ -1,18 +1,23 @@
 { pkgs, ... }:
-
 {
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        # 使用 tuigreet 作為介面，並預設啟動 Hyprland
-	command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --sessions ${pkgs.xorg.xinit}/share/xsessions";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --sessions /etc/greetd/sessions";
         user = "eric";
       };
     };
   };
 
-  # 為了讓 tuigreet 正常顯示，優化虛擬終端機設定
+  # 手動建立 session 文件
+  environment.etc."greetd/sessions/hyprland.desktop".text = ''
+    [Desktop Entry]
+    Name=Hyprland
+    Exec=Hyprland
+    Type=Application
+  '';
+
   systemd.services.greetd.serviceConfig = {
     Type = "idle";
     StandardInput = "tty";
