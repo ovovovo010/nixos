@@ -57,6 +57,7 @@
         "$mainMod, J, togglesplit,"
         "$mainMod, f, fullscreen,"
         ''$mainMod SHIFT, R, exec, wf-recorder -g "$(slurp)" -f ~/Videos/$(date +%Y%m%d_%H%M%S).mp4''
+	"$mainMod SHIFT, E, exec, pkill -INT wf-recorder"
 
         # 焦點移動 (vim 風格)
         "$mainMod, h, movefocus, l"
