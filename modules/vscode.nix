@@ -30,6 +30,7 @@
       usernamehw.errorlens
       christian-kohler.path-intellisense
       streetsidesoftware.code-spell-checker
+      Chinese (Traditional) Language Pack for Visual Studio Code
 
       # 主題與外觀
       pkief.material-icon-theme
