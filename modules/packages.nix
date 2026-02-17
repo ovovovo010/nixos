@@ -68,5 +68,6 @@
      easyeffects
      docker
      vesktop
+     wf-recorder
   ];
 }
