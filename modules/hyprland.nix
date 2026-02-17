@@ -148,7 +148,6 @@
         # 加你想開的程式（範例，依需求改/加）
          "hyprpaper"
 	 "fcitx5 -d"
-	 "waybar"
         # "~/.config/hypr/scripts/init.sh &"  # 自訂腳本
 	"swww-daemon --format xrgb"
         "swww img /home/eric/Pictures/wallpapers/wp6475014-city-ultra-hd-wallpapers.jpg --transition-type fade --tansition-duration 2"
