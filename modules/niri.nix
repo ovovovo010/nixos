@@ -12,7 +12,7 @@
         repeat-delay 600
         repeat-rate 25
       }
-      pointer {
+      mouse {
         accel-speed 0.2
         accel-profile "flat"
       }
