@@ -151,7 +151,7 @@
 	 "waybar"
         # "~/.config/hypr/scripts/init.sh &"  # 自訂腳本
 	"swww-daemon --format xrgb"
-        "swww img /home/eric/Pictures/wallpaper/pexels-rpnickson-2885320.jpg --transition-type fade --ta         nsition-duration 2"
+        "swww img /home/eric/Pictures/wallpaper/pexels-haugsveenphoto-1361215.jpg --transition-type fade --ta         nsition-duration 2"
       ];
 
       # 如果需要每次 reload 都跑的（很少用）
