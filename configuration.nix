@@ -13,6 +13,7 @@
       ./System/users-System.nix
       ./System/steam-System.nix
       ./System/data.nix
+      ./System/clamav.nix
 
     ];
 
@@ -35,6 +36,7 @@
    services.xserver.enable = true;
 
    services.flatpak.enable = true;
+
 
    nix.settings.substituters = [
   "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"  # 清華鏡像
