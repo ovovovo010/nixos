@@ -13,6 +13,12 @@
     address = "ovovovo010@proton.me";
     realName = "Eric";
     userName = "ovovovo010@proton.me";
+
+  accounts.email.accounts."Gmail" = {
+    primary = true;  # <--- 必須加上這一行，解決 "found 0" 的問題
+    address = "ovovovo010@gmail.com";
+    realName = "Eric";
+    userName = "ovovovo010@gmail.com";
     
     # 關聯 Thunderbird
     thunderbird.enable = true;
