@@ -11,8 +11,6 @@
     ./modules/hyprland.nix
     ./modules/virt-manager-hm.nix
     ./modules/steam-tools.nix
-    ./modules/thunderbird.nix
-    ./modules/hydroxide.nix
     ./modules/rofi.nix
     ./modules/cava.nix
     ./modules/hyprlock-idle.nix
