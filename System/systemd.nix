@@ -61,7 +61,7 @@
 
   # ── OOM Killer 優化 ─────────────────────────────────────────────────
   # 啟用 systemd-oomd（比 kernel OOM killer 更聰明）
-  services.systemd-oomd = {
+  systemd.oomd = {
     enable = true;
     enableRootSlice = true;
     enableSystemSlice = true;
