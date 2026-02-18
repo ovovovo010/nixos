@@ -21,6 +21,7 @@
     ./modules/obs.nix
     ./modules/vscode.nix
     ./modules/niri.nix
+    ./modules/cursor.nix
 
 
   ];

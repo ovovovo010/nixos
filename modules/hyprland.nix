@@ -4,16 +4,17 @@
     enable = true;
 
     # 可選：如果你用 systemd integration（大多數人開），這確保環境變數傳遞
-    # systemd.enable = true;  # 預設是 true，如果你有問題可試 false
+     systemd.enable = true;  # 預設是 true，如果你有問題可試 false
 
     settings = {
       # 1. 環境變數
-      env = [
-        "XCURSOR_SIZE,24"
-        "HYPRCURSOR_SIZE,24"
-        "HYPRSHOT_DIR,$HOME/Pictures/Screenshots"
-      ];
-
+  env = [
+    "XCURSOR_SIZE,24"
+    "HYPRCURSOR_SIZE,24"
+    "XCURSOR_THEME,catppuccin-macchiato-lavender-cursors"  # 加這行
+    "HYPRCURSOR_THEME,catppuccin-macchiato-lavender-cursors"  # 加這行
+    "HYPRSHOT_DIR,$HOME/Pictures/Screenshots"
+];
       # 2. 基本輸入
       input = {
         kb_layout = "us";
