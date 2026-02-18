@@ -37,7 +37,7 @@
       After = [ "network.target" ];
     };
     Service = {
-      ExecStart = "${pkgs.hydroxide}/bin/hydroxide -imap-port 1144 -smtp-port 1026 serve";
+      ExecStart = "${pkgs.hydroxide}/bin/hydroxide -imap-port 1144 -smtp-port 1026 -carddav-port 8081 serve";
       Restart = "on-failure";
       RestartSec = "5s";
       Environment = [
