@@ -14,6 +14,8 @@
       ./System/steam-System.nix
       ./System/data.nix
       ./System/clamav.nix
+      ./System/btrfs.nix
+      ./System/generation.nix
 
     ];
 
