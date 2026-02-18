@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  home.pointerCursors = {
+  home.pointerCursor = {
     name = "catppuccin-macchiato-lavender-cursors";
     size = 24;
     package = pkgs.catppuccin-cursors;
