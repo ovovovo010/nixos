@@ -11,11 +11,12 @@
   env = [
     "XCURSOR_SIZE,24"
     "HYPRCURSOR_SIZE,24"
-    "XCURSOR_THEME,catppuccin-macchiato-lavender-cursors"  # 加這行
-    "HYPRCURSOR_THEME,catppuccin-macchiato-lavender-cursors"  # 加這行
+    "XCURSOR_THEME,catppuccin-macchiato-lavender-cursors"
+    "HYPRCURSOR_THEME,catppuccin-macchiato-lavender-cursors"
     "HYPRSHOT_DIR,$HOME/Pictures/Screenshots"
-];
-      # 2. 基本輸入
+    "QT_QPA_PLATFORMTHEME,qt5ct"
+    "QT_STYLE_OVERRIDE,kvantum"
+];      # 2. 基本輸入
       input = {
         kb_layout = "us";
         follow_mouse = 1;
