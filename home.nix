@@ -22,6 +22,7 @@
     ./modules/vscode.nix
     ./modules/niri.nix
     ./modules/catppuccin.nix
+    ./modules/cursor.nix
 
 
   ];
