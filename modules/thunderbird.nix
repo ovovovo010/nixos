@@ -14,6 +14,13 @@
     realName = "Eric";
     userName = "ovovovo010@proton.me";
 
+  accounts.email.accounts."Proton" = {
+    primary = true;  # <--- 必須加上這一行，解決 "found 0" 的問題
+    address = "ovovovo000@proton.me";
+    realName = "Eric";
+    userName = "ovovovo000@proton.me";
+
+
   accounts.email.accounts."Gmail" = {
     primary = true;  # <--- 必須加上這一行，解決 "found 0" 的問題
     address = "ovovovo010@gmail.com";
