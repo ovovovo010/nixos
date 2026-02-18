@@ -55,7 +55,6 @@
      protonup-qt
      vim
      pciutils
-     hydroxide
      cava
      swww
      pywal
