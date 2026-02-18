@@ -30,20 +30,18 @@ in
   };
 
   # GTK4 libadwaita fix
-  home.file = {
-    ".config/gtk-4.0/gtk.css" = {
-      source = "${gtkTheme}/share/themes/${gtkThemeName}/gtk-4.0/gtk.css";
-      force = true;
-    };
-    ".config/gtk-4.0/gtk-dark.css" = {
-      source = "${gtkTheme}/share/themes/${gtkThemeName}/gtk-4.0/gtk-dark.css";
-      force = true;
-    };
-    ".config/gtk-4.0/assets" = {
-      source = "${gtkTheme}/share/themes/${gtkThemeName}/gtk-4.0/assets";
-      recursive = true;
-      force = true;
-    };
+  xdg.configFile."gtk-4.0/gtk.css" = {
+    source = "${gtkTheme}/share/themes/${gtkThemeName}/gtk-4.0/gtk.css";
+    force = true;
+  };
+  xdg.configFile."gtk-4.0/gtk-dark.css" = {
+    source = "${gtkTheme}/share/themes/${gtkThemeName}/gtk-4.0/gtk-dark.css";
+    force = true;
+  };
+  xdg.configFile."gtk-4.0/assets" = {
+    source = "${gtkTheme}/share/themes/${gtkThemeName}/gtk-4.0/assets";
+    recursive = true;
+    force = true;
   };
 
   # ── Kvantum（Qt 主題）──────────────────────────────────────────────
