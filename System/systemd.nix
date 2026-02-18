@@ -13,6 +13,12 @@
 
     # 限制 coredump 大小
     DefaultLimitCORE=0
+
+    # CPU/Memory accounting
+    DefaultCPUAccounting=no
+    DefaultMemoryAccounting=yes
+    DefaultTasksAccounting=yes
+    DefaultTasksMax=80%
   '';
 
   # ── Journal 日誌設定 ────────────────────────────────────────────────
@@ -63,14 +69,6 @@
   };
 
   # ── 排程優化 ────────────────────────────────────────────────────────
-  # 讓系統服務和使用者程式有更公平的 CPU 分配
-  systemd.extraConfig = lib.mkAfter ''
-    CPUAffinity=
-    DefaultCPUAccounting=no
-    DefaultMemoryAccounting=yes
-    DefaultTasksAccounting=yes
-    DefaultTasksMax=80%
-  '';
 
   # ── Tmpfs 優化 ──────────────────────────────────────────────────────
   # /tmp 放在記憶體，加速暫存 IO
