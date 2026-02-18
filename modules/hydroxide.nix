@@ -78,10 +78,8 @@
     address = "ovovovo000@proton.me";
     realName = "Eric";
     userName = "ovovovo000@proton.me";
-
     thunderbird.enable = true;
     thunderbird.profiles = [ "eric" ];
-
     imap = {
       host = "127.0.0.1";
       port = 1144;
@@ -91,6 +89,25 @@
       host = "127.0.0.1";
       port = 1026;
       tls.enable = false;
+    };
+  };
+
+  accounts.email.accounts."Gmail" = {
+    primary = false;
+    address = "ovovovo010@gmail.com";
+    realName = "Eric";
+    userName = "ovovovo010@gmail.com";
+    thunderbird.enable = true;
+    thunderbird.profiles = [ "eric" ];
+    imap = {
+      host = "imap.gmail.com";
+      port = 993;
+      tls.enable = true;
+    };
+    smtp = {
+      host = "smtp.gmail.com";
+      port = 587;
+      tls.enable = true;
     };
   };
 }
