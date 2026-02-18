@@ -70,6 +70,8 @@
      wf-recorder
      r2modman
      code-cursor
-     protonmail-desktop
+     (protonmail-desktop.override {
+      electron = electron_35;
+})
   ];
 }
