@@ -71,7 +71,7 @@
      r2modman
      code-cursor
      (protonmail-desktop.override {
-      electron = electron_36;
+      electron = electron_37;
 })
   ];
 }
