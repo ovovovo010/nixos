@@ -4,7 +4,7 @@ let
   flavor = "macchiato";
   accent = "lavender";
   cursorName = "catppuccin-macchiato-lavender-cursors";
-  gtkThemeName = "Catppuccin-Macchiato-Standard-Lavender-Dark";
+  gtkThemeName = "catppuccin-macchiato-lavender-standard+normal";
 
   gtkTheme = pkgs.catppuccin-gtk.override {
     accents = [ accent ];
