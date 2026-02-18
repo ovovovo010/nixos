@@ -92,22 +92,4 @@
     };
   };
 
-  accounts.email.accounts."Gmail" = {
-    primary = false;
-    address = "ovovovo010@gmail.com";
-    realName = "Eric";
-    userName = "ovovovo010@gmail.com";
-    thunderbird.enable = true;
-    thunderbird.profiles = [ "eric" ];
-    imap = {
-      host = "imap.gmail.com";
-      port = 993;
-      tls.enable = true;
-    };
-    smtp = {
-      host = "smtp.gmail.com";
-      port = 587;
-      tls.enable = true;
-    };
-  };
 }
