@@ -14,8 +14,8 @@ let
   };
 
   kvantumTheme = pkgs.catppuccin-kvantum.override {
-    accent = "Lavender";
-    variant = "Macchiato";
+    accent = "lavender";
+    variant = "macchiato";
   };
 in
 {
@@ -70,12 +70,12 @@ in
 
     # Kvantum 設定
     "Kvantum/catppuccin" = {
-      source = "${kvantumTheme}/share/Kvantum/Catppuccin-Macchiato-Lavender";
+      source = "${kvantumTheme}/share/Kvantum/catppuccin-macchiato-lavender";
       recursive = true;
     };
     "Kvantum/kvantum.kvconfig".text = ''
       [General]
-      theme=Catppuccin-Macchiato-Lavender
+      theme=catppuccin-macchiato-lavender
     '';
   };
 
