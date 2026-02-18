@@ -72,7 +72,8 @@
    nixpkgs.config.allowUnfree = true;
 
    services.thermald.enable = true;
-   powerManagement.cpuFreqGovernor = "performance"
+
+   powerManagement.cpuFreqGovernor = "performance";
 
   
 
