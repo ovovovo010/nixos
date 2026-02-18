@@ -31,7 +31,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.sharedModules = [ catppuccin.homeManagerModules.catppuccin ];
+          home-manager.sharedModules = [ catppuccin.homeModules.catppuccin ];
           home-manager.users.eric = import ./home.nix;
         }
       ];
