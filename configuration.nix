@@ -16,6 +16,7 @@
       ./System/clamav.nix
       ./System/btrfs.nix
       ./System/generation.nix
+      ./System/systemd.nix
 
     ];
 
